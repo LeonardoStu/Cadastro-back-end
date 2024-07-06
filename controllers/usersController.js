@@ -1,6 +1,7 @@
 const Users = require('../model/users')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const path = require('path')
 
 const userController = {
     create: async(req, res) => {
@@ -102,7 +103,7 @@ const userController = {
 
             if(!isMatch) return res.status(401).json({ msg: 'Senha inválida' })
 
-            const token = jwt.sign({ id: user._id }, 'meu_segredo', { expiresIn: '24h' })
+            const token = jwt.sign({ id: user._id }, process.env.SECRET, { expiresIn: '24h' })
             res.json({ token, user: { id: user._id, name: user.name, email: user.email }})
         } catch (error) {
             console.log(error)
