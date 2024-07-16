@@ -15,12 +15,6 @@ const corsOptions = {
 app.options('*', cors(corsOptions)); // Responde a todas as requisições OPTIONS
 app.use(express.json())
 
-app.use((req, res, next) => {
-    res.on('finish', () => {
-        console.log(res.getHeaders());
-    });
-    next();
-});
 
 
 // DB connection
