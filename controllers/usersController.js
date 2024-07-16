@@ -21,7 +21,8 @@ const userController = {
             }
 
             const response = await Users.create(user)
-            res.status(201).json({ response, msg: 'Usuário cadastrado com sucesso'})
+            const token = jwt.sign({ id: user._id }, process.env.SECRET)
+            res.status(201).json({ token, response, msg: 'Usuário cadastrado com sucesso'})
         } catch (error) {
             console.log(error)
             res.status(500).json({ msg: 'Erro ao criar usuário. Tente novamente mais tarde.' });
@@ -101,10 +102,10 @@ const userController = {
 
             const isMatch = await bcrypt.compare(password, user.password)
 
-            if(!isMatch) return res.status(401).json({ msg: 'Senha inválida' })
+            if(!isMatch) return res.status(401).json({ msg: 'Senha ou email inválidos' })
 
             const token = jwt.sign({ id: user._id }, process.env.SECRET)
-            res.json({ token, user: { id: user._id, name: user.name, email: user.email }})
+            res.json({ token, user: { id: user._id, name: user.name, email: user.email, msg: 'Usuário logado com sucesso' }})
         } catch (error) {
             console.log(error)
             res.status(500).json({ msg: 'Erro ao fazer login. Tente novamente mais tarde.'})
