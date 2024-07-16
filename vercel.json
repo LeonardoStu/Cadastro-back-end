@@ -11,5 +11,14 @@
       "src": "/(.*)",
       "dest": "/index.js"
     }
+  ], 
+  "routes": [
+    {
+      "src": "/login",
+      "methods": ["POST"],
+      "headers": {
+        "Access-Control-Allow-Origin": "*"
+      }
+    }
   ]
 }
