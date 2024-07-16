@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon app.js"
+    "start": "node app.js",
+    "build": "echo 'No build step necessary'",
+    "postinstall": "npm install"
   },
   "keywords": [],
   "author": "",
