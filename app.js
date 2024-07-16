@@ -5,7 +5,13 @@ const database = require('./config/database')
 const cors = require('cors')
 const app = express()
 
-app.use(cors())
+const corsOptions = {
+    origin: 'http://localhost:5173/',
+    methods: 'GET, HEAD, PUT, PATCH, POST, DELETE',
+    allowedHeaders: ['Content-Type', 'Authorization']
+}
+
+app.options('*', cors()); // Responde a todas as requisições OPTIONS
 app.use(express.json())
 
 // DB connection
